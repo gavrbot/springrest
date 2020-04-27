@@ -1,6 +1,7 @@
 package com.gavrbot.springrest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,31 +12,33 @@ public class DishResource {
     @Autowired
     DishRepository repo;
 
-    @GetMapping(value = "dishes")
+    @GetMapping(value = "get")
     public List<Dish> findAll(){
         List<Dish> dishes = (List<Dish>) repo.findAll();
         return dishes;
     }
 
-    @PostMapping("dish")
+    @PostMapping("add")
     public Dish createDish(@RequestBody Dish dish){
         repo.save(dish);
-        System.out.println(dish);
+        System.out.println("Created dish:"+dish);
         return dish;
     }
 
-    @GetMapping("dish/{id}")
+    @GetMapping("get/{id}")
     public Optional<Dish> findById(@PathVariable("id")int id){
         return repo.findById(id);
     }
 
-    @DeleteMapping("dish/{id}")
+    @DeleteMapping("delete/{id}")
     public void deleteById(@PathVariable("id") int id){
         repo.deleteById(id);
     }
 
-    @DeleteMapping("dish")
-    public void delete(@RequestBody Dish dish){
-        repo.delete(dish);
+    @PutMapping("update")
+    public Dish updateDish(@RequestBody Dish dish){
+        repo.save(dish);
+        System.out.println("Updated dish with id:"+dish.getId());
+        return dish;
     }
 }
