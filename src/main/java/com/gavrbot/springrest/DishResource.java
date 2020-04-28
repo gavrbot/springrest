@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 public class DishResource {
     @Autowired
@@ -32,6 +33,7 @@ public class DishResource {
 
     @DeleteMapping("delete/{id}")
     public void deleteById(@PathVariable("id") int id){
+        System.out.println("Deleted dish with id:"+id);
         repo.deleteById(id);
     }
 
