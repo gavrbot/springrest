@@ -1,26 +1,20 @@
 package com.gavrbot.springrest;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import javax.persistence.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement
 @Entity
 @Table(name = "dishes_table")
-@JsonPropertyOrder({"id","name","price","category"})
 public class Dish {
     @Id
+    @GeneratedValue
     @PrimaryKeyJoinColumn
     private int id;
     private String name;
     private double price;
     private String category;
 
-    public Dish(){}
+    public Dish() {
+    }
 
     public int getId() {
         return id;
@@ -54,9 +48,8 @@ public class Dish {
         this.price = price;
     }
 
-    public String toString()
-    {
-        StringBuffer stringBuffer = new StringBuffer("Id:"+id+" Dish:"+ name +" Price:"+ price +" Category:"+ category);
+    public String toString() {
+        StringBuffer stringBuffer = new StringBuffer("Id:" + id + " Dish:" + name + " Price:" + price + " Category:" + category);
         return new String(stringBuffer);
     }
 }
