@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "dishes_table")
 public class Dish {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @PrimaryKeyJoinColumn
     private int id;
     private String name;
